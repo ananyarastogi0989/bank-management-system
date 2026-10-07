@@ -2,22 +2,22 @@
 
 A full-stack banking application built with Django (backend), React (frontend), MongoDB (database), and Material UI.
 
-## 📊 Project Status
+##  Project Status
 
 | Phase | Name | Status | Details |
 |-------|------|--------|---------|
-| 1 | Django Setup & DRF Configuration | ✅ Complete | REST API framework, JWT auth, CORS configured |
-| 2 | MongoDB Models & Services | ✅ Complete | User, Account, Transaction models with business logic |
-| 3 | Authentication Endpoints | 🔄 Next | JWT login/register/logout, profile management |
-| 4 | Account Operations | ⏳ Planned | Create accounts, view details, manage settings |
-| 5 | Transaction Operations | ⏳ Planned | Deposit, withdrawal, transfer operations |
-| 6 | Account History | ⏳ Planned | Transaction history, filtering, pagination |
-| 7 | Balance Transfers | ⏳ Planned | P2P transfers, balance checking |
-| 8 | Transaction History | ⏳ Planned | Advanced filtering, analytics |
-| 9 | Admin Dashboard | ⏳ Planned | User management, account blocking, statistics |
-| 10+ | Frontend & Deployment | ⏳ Planned | React UI, Docker, Azure deployment |
+| 1 | Django Setup & DRF Configuration |  Complete | REST API framework, JWT auth, CORS configured |
+| 2 | MongoDB Models & Services |  Complete | User, Account, Transaction models with business logic |
+| 3 | Authentication Endpoints |  Next | JWT login/register/logout, profile management |
+| 4 | Account Operations |  Planned | Create accounts, view details, manage settings |
+| 5 | Transaction Operations |  Planned | Deposit, withdrawal, transfer operations |
+| 6 | Account History |  Planned | Transaction history, filtering, pagination |
+| 7 | Balance Transfers |  Planned | P2P transfers, balance checking |
+| 8 | Transaction History |  Planned | Advanced filtering, analytics |
+| 9 | Admin Dashboard |  Planned | User management, account blocking, statistics |
+| 10+ | Frontend & Deployment |  Planned | React UI, Docker, Azure deployment |
 
-## 🏗️ Architecture
+##  Architecture
 
 ### Backend Stack
 - **Framework**: Django 5.2.5
@@ -40,7 +40,7 @@ A full-stack banking application built with Django (backend), React (frontend), 
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### 1. Prerequisites
 ```bash
@@ -88,7 +88,7 @@ python manage.py runserver
 
 ---
 
-## 📋 API Documentation
+##  API Documentation
 
 ### Authentication (Phase 3)
 ```
@@ -124,7 +124,7 @@ PUT    /api/admin/accounts/<id>/block/    Block account
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 bankManagementSystem/
@@ -164,7 +164,7 @@ bankManagementSystem/
 
 ---
 
-## 🔧 Configuration
+##  Configuration
 
 ### Environment Variables (.env)
 ```
@@ -233,31 +233,31 @@ CORS_ALLOWED_ORIGINS=http://localhost:3000,http://localhost:5173
 
 ---
 
-## 🔐 Security Features
+##  Security Features
 
-✅ **Password Security**
+ **Password Security**
 - PBKDF2 hashing with salt
 - 100,000 iterations
 - Unique salt per password
 
-✅ **Authentication**
+ **Authentication**
 - JWT tokens with expiration
 - Role-based access control
 - Account ownership verification
 
-✅ **Data Validation**
+ **Data Validation**
 - Email format validation
 - Amount validation (positive only)
 - Input sanitization
 
-✅ **API Security**
+ **API Security**
 - CORS configured
 - HTTPS ready (production)
 - Account ownership checks
 
 ---
 
-## 🧪 Testing
+##  Testing
 
 ### Database Connection
 ```bash
@@ -276,7 +276,7 @@ python manage.py create_sample_data --clear
 
 ---
 
-## 🛠️ Development Workflow
+##  Development Workflow
 
 1. **Work on one phase at a time**
 2. **Test before proceeding**
@@ -285,7 +285,7 @@ python manage.py create_sample_data --clear
 
 ---
 
-## 🐛 Troubleshooting
+##  Troubleshooting
 
 ### MongoDB Connection Error
 ```bash
@@ -308,7 +308,7 @@ python manage.py init_db
 
 ---
 
-## 📚 Documentation
+##  Documentation
 
 - [Phase 2 Guide](./PHASE_2_GUIDE.md) - Detailed setup and models
 - Architecture: See project structure above
@@ -316,7 +316,7 @@ python manage.py init_db
 
 ---
 
-## 📝 Dependencies
+##  Dependencies
 
 | Package | Version | Purpose |
 |---------|---------|---------|
@@ -329,7 +329,7 @@ python manage.py init_db
 
 ---
 
-## 🚀 Next Steps
+##  Next Steps
 
 ### Phase 3: Authentication Endpoints
 - [ ] User registration endpoint
@@ -357,7 +357,7 @@ python manage.py init_db
 
 ---
 
-## ✅ Completed Work
+##  Completed Work
 
 - [x] Phase 1: Django & REST Framework setup
 - [x] Phase 2: MongoDB models and services
@@ -373,7 +373,7 @@ python manage.py init_db
 
 ---
 
-## 📝 License
+##  License
 
 MIT License
 

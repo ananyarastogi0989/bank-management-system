@@ -10,7 +10,6 @@ from bank.views import (
     ListAccountsView,
     AccountDetailView,
     AccountStatusView,
-    # Phase 5 – Transaction endpoints
     DepositView,
     WithdrawView,
     TransferView,
@@ -19,7 +18,6 @@ from bank.views import (
 )
 
 urlpatterns = [
-    # Authentication endpoints
     path('auth/register/', UserRegistrationView.as_view(), name='user-register'),
     path('auth/login/', UserLoginView.as_view(), name='user-login'),
     path('auth/logout/', UserLogoutView.as_view(), name='user-logout'),
@@ -27,16 +25,14 @@ urlpatterns = [
     path('auth/profile/', UserProfileUpdateView.as_view(), name='user-profile-update'),
     path('auth/change-password/', ChangePasswordView.as_view(), name='change-password'),
 
-    # Account management endpoints
-    path('accounts/', CreateAccountView.as_view(), name='create-account'),           # POST
-    path('accounts/list/', ListAccountsView.as_view(), name='list-accounts'),        # GET
-    path('accounts/<str:account_number>/', AccountDetailView.as_view(), name='account-detail'),        # GET
-    path('accounts/<str:account_number>/status/', AccountStatusView.as_view(), name='account-status'), # GET
+    path('accounts/', CreateAccountView.as_view(), name='create-account'),           
+    path('accounts/list/', ListAccountsView.as_view(), name='list-accounts'),        
+    path('accounts/<str:account_number>/', AccountDetailView.as_view(), name='account-detail'),        
+    path('accounts/<str:account_number>/status/', AccountStatusView.as_view(), name='account-status'), 
 
-    # Transaction endpoints (Phase 5)
-    path('transactions/', AllTransactionsView.as_view(), name='all-transactions'),         # GET
-    path('transactions/deposit/', DepositView.as_view(), name='deposit'),                  # POST
-    path('transactions/withdraw/', WithdrawView.as_view(), name='withdraw'),               # POST
-    path('transactions/transfer/', TransferView.as_view(), name='transfer'),               # POST
-    path('transactions/<str:account_number>/', TransactionHistoryView.as_view(), name='transaction-history'),  # GET
+    path('transactions/', AllTransactionsView.as_view(), name='all-transactions'),         
+    path('transactions/deposit/', DepositView.as_view(), name='deposit'),                 
+    path('transactions/withdraw/', WithdrawView.as_view(), name='withdraw'),               
+    path('transactions/transfer/', TransferView.as_view(), name='transfer'),               
+    path('transactions/<str:account_number>/', TransactionHistoryView.as_view(), name='transaction-history'),  
 ]

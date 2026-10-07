@@ -19,12 +19,11 @@ export default function App() {
   return (
     <AuthProvider>
       <Routes>
-        {/* Public routes */}
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
 
-        {/* Protected routes (require login) */}
+      
         <Route
           element={
             <ProtectedRoute>
@@ -42,7 +41,6 @@ export default function App() {
           <Route path="/profile" element={<ProfilePage />} />
         </Route>
 
-        {/* Catch-all */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </AuthProvider>

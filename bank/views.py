@@ -70,7 +70,7 @@ class UserRegistrationView(APIView):
                     status_code=status.HTTP_400_BAD_REQUEST
                 )
             
-            # Use AuthService to register user
+            
             user = AuthService.register_user(
                 name=serializer.validated_data['name'],
                 email=serializer.validated_data['email'],
@@ -144,13 +144,13 @@ class UserLoginView(APIView):
                     status_code=status.HTTP_400_BAD_REQUEST
                 )
             
-            # Use AuthService to login user
+            
             user = AuthService.login_user(
                 email=serializer.validated_data['email'],
                 password=serializer.validated_data['password']
             )
             
-            # Generate JWT token
+           
             token = generate_token(str(user['_id']), user['role'])
             
             return success_response(
@@ -201,8 +201,7 @@ class UserLogoutView(APIView):
     def post(self, request):
         """Logout user (token invalidation handled client-side)"""
         try:
-            # In future, this could implement token blacklisting
-            # For now, just confirm logout
+            
             return success_response(
                 message="Logout successful",
                 data={},
@@ -244,7 +243,6 @@ class UserProfileView(APIView):
     def get(self, request):
         """Get current user profile"""
         try:
-            # Extract user from token
             token = request.auth
             user_data = get_user_from_token(str(token))
             
@@ -254,7 +252,7 @@ class UserProfileView(APIView):
                     status_code=status.HTTP_401_UNAUTHORIZED
                 )
             
-            # Get user from database
+            
             user = User.get_user(ObjectId(user_data['user_id']))
             
             if not user:
@@ -311,7 +309,6 @@ class UserProfileUpdateView(APIView):
     def put(self, request):
         """Update user profile (name and phone only)"""
         try:
-            # Extract user from token
             token = request.auth
             user_data = get_user_from_token(str(token))
             
@@ -321,7 +318,6 @@ class UserProfileUpdateView(APIView):
                     status_code=status.HTTP_401_UNAUTHORIZED
                 )
             
-            # Validate input
             serializer = UserProfileUpdateSerializer(data=request.data)
             
             if not serializer.is_valid():
@@ -331,7 +327,6 @@ class UserProfileUpdateView(APIView):
                     status_code=status.HTTP_400_BAD_REQUEST
                 )
             
-            # Update user
             user = User.update_user(
                 user_id=ObjectId(user_data['user_id']),
                 name=serializer.validated_data.get('name'),
@@ -387,7 +382,6 @@ class ChangePasswordView(APIView):
     def put(self, request):
         """Change user password"""
         try:
-            # Extract user from token
             token = request.auth
             user_data = get_user_from_token(str(token))
             
@@ -397,7 +391,6 @@ class ChangePasswordView(APIView):
                     status_code=status.HTTP_401_UNAUTHORIZED
                 )
             
-            # Validate input
             serializer = ChangePasswordSerializer(data=request.data)
             
             if not serializer.is_valid():
@@ -407,7 +400,6 @@ class ChangePasswordView(APIView):
                     status_code=status.HTTP_400_BAD_REQUEST
                 )
             
-            # Use AuthService to change password
             AuthService.change_password(
                 user_id=ObjectId(user_data['user_id']),
                 old_password=serializer.validated_data['old_password'],
@@ -434,9 +426,6 @@ class ChangePasswordView(APIView):
             )
 
 
-# ============================================================================
-# ACCOUNT MANAGEMENT VIEWS (Phase 4)
-# ============================================================================
 
 
 class CreateAccountView(APIView):
@@ -471,7 +460,6 @@ class CreateAccountView(APIView):
     def post(self, request):
         """Create a new account for current user"""
         try:
-            # Extract user from token
             token = request.auth
             user_data = get_user_from_token(str(token))
             
@@ -481,7 +469,7 @@ class CreateAccountView(APIView):
                     status_code=status.HTTP_401_UNAUTHORIZED
                 )
             
-            # Validate input
+          
             serializer = CreateAccountSerializer(data=request.data)
             
             if not serializer.is_valid():
@@ -491,7 +479,7 @@ class CreateAccountView(APIView):
                     status_code=status.HTTP_400_BAD_REQUEST
                 )
             
-            # Create account using AccountService
+            
             account = AccountService.create_account(
                 user_id=ObjectId(user_data['user_id']),
                 account_type=serializer.validated_data['account_type']
@@ -548,7 +536,6 @@ class ListAccountsView(APIView):
     def get(self, request):
         """Get all accounts for current user"""
         try:
-            # Extract user from token
             token = request.auth
             user_data = get_user_from_token(str(token))
             
@@ -558,7 +545,6 @@ class ListAccountsView(APIView):
                     status_code=status.HTTP_401_UNAUTHORIZED
                 )
             
-            # Get user accounts
             accounts = AccountService.get_user_accounts(ObjectId(user_data['user_id']))
             
             serializer = AccountSerializer(accounts, many=True)
@@ -605,7 +591,6 @@ class AccountDetailView(APIView):
     def get(self, request, account_number):
         """Get account details"""
         try:
-            # Extract user from token
             token = request.auth
             user_data = get_user_from_token(str(token))
             
@@ -615,7 +600,6 @@ class AccountDetailView(APIView):
                     status_code=status.HTTP_401_UNAUTHORIZED
                 )
             
-            # Verify account ownership
             account = AccountService.verify_account_ownership(
                 ObjectId(user_data['user_id']),
                 account_number
@@ -667,7 +651,6 @@ class AccountStatusView(APIView):
     def get(self, request, account_number):
         """Get account status"""
         try:
-            # Extract user from token
             token = request.auth
             user_data = get_user_from_token(str(token))
             
@@ -677,7 +660,6 @@ class AccountStatusView(APIView):
                     status_code=status.HTTP_401_UNAUTHORIZED
                 )
             
-            # Verify account ownership
             account = AccountService.verify_account_ownership(
                 ObjectId(user_data['user_id']),
                 account_number
@@ -707,9 +689,6 @@ class AccountStatusView(APIView):
             )
 
 
-# ============================================================================
-# TRANSACTION VIEWS (Phase 5)
-# ============================================================================
 
 
 class DepositView(APIView):
@@ -893,7 +872,7 @@ class TransactionHistoryView(APIView):
             if not user_data:
                 return error_response(message="Invalid or expired token", status_code=status.HTTP_401_UNAUTHORIZED)
 
-            # Verify account ownership
+            
             AccountService.verify_account_ownership(ObjectId(user_data['user_id']), account_number)
 
             page = int(request.query_params.get('page', 1))
@@ -945,7 +924,7 @@ class AllTransactionsView(APIView):
             if not user_data:
                 return error_response(message="Invalid or expired token", status_code=status.HTTP_401_UNAUTHORIZED)
 
-            # Get all accounts for this user
+        
             accounts = AccountService.get_user_accounts(ObjectId(user_data['user_id']))
             account_numbers = [a['account_number'] for a in accounts]
 
@@ -953,7 +932,7 @@ class AllTransactionsView(APIView):
             page_size = int(request.query_params.get('page_size', 20))
             skip = (page - 1) * page_size
 
-            # Aggregate transactions across all accounts
+           
             from bank.database import get_collection
             collection = get_collection('transactions')
             query = {

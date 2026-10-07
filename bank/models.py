@@ -21,11 +21,9 @@ class User:
         """Create a new user in MongoDB"""
         collection = get_collection('users')
         
-        # Check if user already exists
         if collection.find_one({'email': email}):
             raise ValueError("Email already registered")
         
-        # Hash password
         password_hash = User.hash_password(password)
         
         user_doc = {
@@ -58,10 +56,9 @@ class User:
     @staticmethod
     def verify_password(stored_password, provided_password):
         """Verify password"""
-        # stored_password = salt_hex (32 chars) + hash_hex (64 chars)
         salt_hex = stored_password[:32]
         stored_hash = stored_password[32:]
-        salt = bytes.fromhex(salt_hex)   # convert hex string back to bytes
+        salt = bytes.fromhex(salt_hex)   
         provided_hash = hashlib.pbkdf2_hmac(
             'sha256',
             provided_password.encode('utf-8'),
@@ -141,7 +138,6 @@ class Account:
         if account_type not in Account.ACCOUNT_TYPES:
             raise ValueError(f"Invalid account type. Must be one of {Account.ACCOUNT_TYPES}")
         
-        # Check if user already has this account type
         existing = collection.find_one({
             'user_id': ObjectId(user_id),
             'account_type': account_type,
@@ -257,7 +253,6 @@ class Transaction:
         """Generate unique transaction ID"""
         collection = get_collection('transactions')
         while True:
-            # Format: TXN + timestamp + random string
             transaction_id = f"TXN{datetime.utcnow().strftime('%Y%m%d%H%M%S')}{secrets.token_hex(4).upper()}"
             if not collection.find_one({'transaction_id': transaction_id}):
                 return transaction_id

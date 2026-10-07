@@ -88,7 +88,7 @@ Visit: `http://127.0.0.1:8000/admin/`
 
 ## Current Phase Progress
 
-### ✅ Phase 1 Complete: Django Backend + Django REST Framework Setup
+###  Phase 1 Complete: Django Backend + Django REST Framework Setup
 - Created Django project structure
 - Installed Django REST Framework
 - Configured CORS for frontend communication
@@ -97,7 +97,7 @@ Visit: `http://127.0.0.1:8000/admin/`
 - Added validation utilities
 - Added response formatting utilities
 
-### 📋 Next Phase: MongoDB Configuration
+###  Next Phase: MongoDB Configuration
 We'll integrate MongoDB and create models for:
 - Users (with authentication)
 - Bank Accounts

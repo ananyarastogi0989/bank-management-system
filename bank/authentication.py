@@ -17,11 +17,10 @@ class CustomJWTAuthentication(TokenAuthentication):
     
     def authenticate(self, request):
         """Authenticate request using JWT token"""
-        # Get the token from the Authorization header
         auth = request.META.get('HTTP_AUTHORIZATION', '').split()
         
         if not auth or auth[0].lower() != self.keyword.lower():
-            return None  # No authentication header
+            return None  
         
         if len(auth) == 1:
             raise AuthenticationFailed('Invalid token header. No credentials provided.')
@@ -32,14 +31,11 @@ class CustomJWTAuthentication(TokenAuthentication):
         token = auth[1]
         
         try:
-            # Verify token using our JWT handler
             payload = verify_token(token)
             
             if payload is None:
                 raise AuthenticationFailed('Invalid or expired token.')
             
-            # Return (user, token) - we don't have a User object, so use payload
-            # Store the token for later use
             class UserObj:
                 def __init__(self, user_id, role):
                     self.user_id = user_id
